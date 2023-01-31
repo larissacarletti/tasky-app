@@ -1,6 +1,6 @@
-package com.example.tasky
+package com.example.tasky.model
 
-data class Todo(
+data class Task(
     val completed: Boolean,
     val id: Int,
     val title: String,
