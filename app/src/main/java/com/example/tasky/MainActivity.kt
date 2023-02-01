@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasky.adapter.TaskAdapter
 import com.example.tasky.databinding.ActivityMainBinding
-import com.example.tasky.model.TaskViewModel
+import com.example.tasky.viewmodel.TaskViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

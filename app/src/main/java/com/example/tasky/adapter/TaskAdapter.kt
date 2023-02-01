@@ -2,6 +2,8 @@ package com.example.tasky.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasky.model.Task
 import com.example.tasky.databinding.ListItemBinding
@@ -15,10 +17,14 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TodoViewHolder>() {
     override fun getItemCount(): Int { return taskList.size }
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val todo = taskList[position]
-        holder.binding.run{
-            tvTitle.text = todo.title
-            checkDone.isChecked = todo.completed
+        holder.run{
+            textTask.text = todo.title
+            check.isChecked = todo.completed
         }
     }
-    inner class TodoViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class TodoViewHolder(binding: ListItemBinding)
+        : RecyclerView.ViewHolder(binding.root) {
+            val textTask: TextView = binding.tvTitle
+            val check: CheckBox = binding.checkDone
+    }
 }
