@@ -1,6 +1,6 @@
 package com.example.tasky.adapter
 
-import android.annotation.SuppressLint
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
@@ -28,7 +28,6 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TodoViewHolder>() {
             val textTask: TextView = binding.tvTitle
             val check: CheckBox = binding.checkDone
     }
-    @SuppressLint("NotifyDataSetChanged")
     fun setTaskList(taskList:List<Task>)  {
         this.taskList.addAll(taskList)
         notifyDataSetChanged()
