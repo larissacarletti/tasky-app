@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Tasky</string>
     <string name="headline">TASKY!</string>
+    <string name="styledText">s>StyledTexts/></string>
 </resources>

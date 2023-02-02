@@ -1,5 +1,6 @@
 package com.example.tasky.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
@@ -14,17 +15,22 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TodoViewHolder>() {
         val binding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent,false)
         return TodoViewHolder(binding)
     }
-    override fun getItemCount(): Int { return taskList.size }
+    override fun getItemCount(): Int = taskList.size
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        val todo = taskList[position]
+        val task = taskList[position]
         holder.run{
-            textTask.text = todo.title
-            check.isChecked = todo.completed
+            textTask.text = task.title
+            check.isChecked = task.completed
         }
     }
     inner class TodoViewHolder(binding: ListItemBinding)
         : RecyclerView.ViewHolder(binding.root) {
             val textTask: TextView = binding.tvTitle
             val check: CheckBox = binding.checkDone
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    fun setTaskList(taskList:List<Task>)  {
+        this.taskList.addAll(taskList)
+        notifyDataSetChanged()
     }
 }

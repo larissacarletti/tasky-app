@@ -1,14 +1,26 @@
 package com.example.tasky.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tasky.model.Task
 import com.example.tasky.repository.TaskRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TaskViewModel (private val repository: TaskRepository) : ViewModel() {
 
-    fun showAllTasks() = viewModelScope.launch(Dispatchers.IO){
-        repository.getTasks()
+    private val _taskList = MutableLiveData<List<Task>>()
+    val taskList: LiveData<List<Task>> = _taskList
+
+    init {
+        viewModelScope.launch(Dispatchers.IO){
+            runCatching {
+                repository.getTasks()
+            }.onSuccess { taskList ->
+                _taskList.postValue(taskList.body())
+            }
+        }
     }
 }
