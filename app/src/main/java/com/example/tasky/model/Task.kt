@@ -1,8 +1,12 @@
 package com.example.tasky.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "task_table")
 data class Task(
-    val completed: Boolean,
-    val id: Int,
-    val title: String,
-    val userId: Int
+   @PrimaryKey(autoGenerate = true) val id: Int,
+   @ColumnInfo("title")val title: String,
+   @ColumnInfo("done")val completed: Boolean,
 )

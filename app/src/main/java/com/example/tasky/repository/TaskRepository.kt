@@ -8,4 +8,5 @@ class TaskRepository (private val taskyApi: TaskyApi) {
 
     suspend fun getTasks() : Response<List<Task>> = taskyApi.getTodos()
 
+    suspend fun insert(task: Task) : Response<List<Task>> = taskyApi.insert()
 }

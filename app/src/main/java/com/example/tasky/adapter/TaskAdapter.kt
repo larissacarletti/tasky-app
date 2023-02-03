@@ -1,9 +1,11 @@
 package com.example.tasky.adapter
 
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasky.model.Task
@@ -21,12 +23,14 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TodoViewHolder>() {
         holder.run{
             textTask.text = task.title
             check.isChecked = task.completed
+            if (task.completed) textTask.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         }
     }
     inner class TodoViewHolder(binding: ListItemBinding)
         : RecyclerView.ViewHolder(binding.root) {
             val textTask: TextView = binding.tvTitle
             val check: CheckBox = binding.checkDone
+
     }
     fun setTaskList(taskList:List<Task>)  {
         this.taskList.addAll(taskList)
