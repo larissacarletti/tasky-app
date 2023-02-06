@@ -1,7 +1,7 @@
 package com.example.tasky.di
 
 import com.example.tasky.api.TaskyApi
-import com.example.tasky.database.TaskDatabase
+import com.example.tasky.database.TaskDao
 import com.example.tasky.repository.TaskRepository
 import com.example.tasky.viewmodel.TaskViewModel
 import okhttp3.OkHttpClient
@@ -27,6 +27,10 @@ val appModule = module {
             .create(TaskyApi::class.java)
     }
     single { TaskRepository(get()) }
+
+    single {
+        TaskDao::class.java(get())
+    }
 
     viewModel {TaskViewModel(get()) }
 

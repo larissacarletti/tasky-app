@@ -1,7 +1,6 @@
 package com.example.tasky
 
 import android.os.Bundle
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasky.adapter.TaskAdapter
@@ -32,27 +31,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerView() = binding.run {
-        val newTask : String = newtask.text.toString()
+        val newTask : String = newtask?.text.toString()
         taskAdapter = TaskAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
         recyclerView.adapter = taskAdapter
-
-        imgSent!!.setOnClickListener {
-            if(task != null){
-                viewModel.insertTask(Task(
-                        title = newTask,
-                        completed = false
-                    )
+        imgSent?.setOnClickListener {
+            viewModel.insertTask(
+                Task(
+                    title = newTask,
+                    completed = false
                 )
-            } else {
-                viewModel.updateTask(
-                    Task(
-                    id = task.id
-                )
-
-                )
-            }
+            )
         }
     }
-
 }
