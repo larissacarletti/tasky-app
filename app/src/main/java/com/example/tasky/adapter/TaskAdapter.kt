@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasky.model.Task
 import com.example.tasky.databinding.ListItemBinding
+import com.example.tasky.util.strikethrough
 
 class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TodoViewHolder>() {
     private val taskList = ArrayList<Task>()
@@ -23,7 +24,7 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TodoViewHolder>() {
         holder.run{
             textTask.text = task.title
             check.isChecked = task.completed
-            if (task.completed) textTask.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            textTask.strikethrough = task.completed
         }
     }
     inner class TodoViewHolder(binding: ListItemBinding)

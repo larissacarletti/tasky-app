@@ -23,8 +23,8 @@ class TaskViewModel (private val repository: TaskRepository) : ViewModel() {
             }
         }
     }
-    fun insertTask(task: Task) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(task)
-    }
+//    fun insertTask(task: Task) = viewModelScope.launch(Dispatchers.IO) {
+//        repository.insert(task)
+//    }
 
 }
