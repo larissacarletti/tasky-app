@@ -1,11 +1,9 @@
 package com.example.tasky.adapter
 
 
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasky.model.Task

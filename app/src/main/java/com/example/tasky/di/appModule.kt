@@ -2,7 +2,6 @@ package com.example.tasky.di
 
 import androidx.room.Room
 import com.example.tasky.api.TaskyApi
-import com.example.tasky.database.TaskDao
 import com.example.tasky.database.TaskDatabase
 import com.example.tasky.repository.TaskRepository
 import com.example.tasky.util.DATABASE_NAME
@@ -30,7 +29,7 @@ val appModule = module {
             .build()
             .create(TaskyApi::class.java)
     }
-    single { TaskRepository(get()) }
+    single { TaskRepository(get(),get()) }
 
     single {
         Room.databaseBuilder(
@@ -42,7 +41,7 @@ val appModule = module {
 
     viewModel {TaskViewModel(get()) }
 
-    single<TaskDao> {
+    single {
         val database = get<TaskDatabase>()
         database.getTaskDao()
     }
