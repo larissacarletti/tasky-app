@@ -1,9 +1,6 @@
 package com.example.tasky.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.tasky.model.Task
 import com.example.tasky.repository.TaskRepository
 import kotlinx.coroutines.Dispatchers
@@ -11,18 +8,8 @@ import kotlinx.coroutines.launch
 
 class TaskViewModel (private val repository: TaskRepository) : ViewModel() {
 
-    private val _taskList = MutableLiveData<List<Task>>()
-    val taskList: LiveData<List<Task>> = _taskList
+    val taskList = repository.getTasks().asLiveData()
 
-    init {
-        viewModelScope.launch(Dispatchers.IO){
-            runCatching {
-                repository.getTasks()
-            }.onSuccess { taskList ->
-                _taskList.postValue(taskList)
-            }
-        }
-    }
     fun insertTask(task: Task) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(task)
     }

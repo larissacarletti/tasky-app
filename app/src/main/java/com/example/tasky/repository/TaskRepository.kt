@@ -12,10 +12,11 @@ class TaskRepository (private val taskyApi: TaskyApi, private val db: TaskDataba
 
     fun getTasks() = networkBoundResource(
         query = { taskdao.getAllTasks() },
-        fetch = { taskyApi.getTodos() },
+        fetch = { taskyApi.getTodos().body() },
+        shouldFetch = {taskList -> taskList.isEmpty()},
         saveFetchResult = { task ->
             db.withTransaction {
-                task.body()?.let { taskdao.insertTasks(it)}
+                task?.let { taskdao.insertTasks(it)}
             }
         }
     )

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasky.adapter.TaskAdapter
 import com.example.tasky.databinding.ActivityMainBinding
 import com.example.tasky.model.Task
+import com.example.tasky.util.Resource
 import com.example.tasky.viewmodel.TaskViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,8 +26,15 @@ class MainActivity : AppCompatActivity() {
         setupObservers()
     }
     private fun setupObservers() {
-        viewModel.taskList.observe(this@MainActivity) { taskList ->
-            taskAdapter.setTaskList(taskList.sortedBy { it.completed })
+        viewModel.taskList.observe(this@MainActivity) { result ->
+            when (result) {
+                is Resource.Success -> result.data?.let { taskList ->
+                    taskAdapter.setTaskList(
+                        taskList.sortedBy { it.completed }
+                    )
+                }
+                else -> Unit
+            }
         }
     }
 
