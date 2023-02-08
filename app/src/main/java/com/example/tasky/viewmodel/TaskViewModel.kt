@@ -19,7 +19,7 @@ class TaskViewModel (private val repository: TaskRepository) : ViewModel() {
             runCatching {
                 repository.getTasks()
             }.onSuccess { taskList ->
-                _taskList.postValue(taskList.body())
+                _taskList.postValue(taskList)
             }
         }
     }
