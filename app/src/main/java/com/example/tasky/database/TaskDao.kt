@@ -13,10 +13,10 @@ interface TaskDao {
    @Insert(onConflict = OnConflictStrategy.REPLACE)
    fun insertTask(task: Task)
 
-   @Query("SELECT * FROM task_table")
-   fun getAllTasks():Flow<List<Task>>
-
    @Update
    fun update(task: Task)
+
+   @Query("SELECT * FROM task_table order by id DESC")
+   fun getAllTasks():Flow<List<Task>>
 
 }

@@ -17,13 +17,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var taskAdapter: TaskAdapter
     private val viewModel by viewModel<TaskViewModel>()
-    //private val task: Task? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setRecyclerView()
         setupObservers()
+        setupView()
     }
     private fun setupObservers() {
         viewModel.taskList.observe(this@MainActivity) { result ->
@@ -39,14 +40,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerView() = binding.run {
-        val newTask : String = newtask?.text.toString()
         taskAdapter = TaskAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
         recyclerView.adapter = taskAdapter
+    }
+
+    private fun setupView() = binding.run {
         imgSent?.setOnClickListener {
             viewModel.insertTask(
                 Task(
-                    title = newTask,
+                    title = newtask?.text.toString(),
                     completed = false
                 )
             )

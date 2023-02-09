@@ -32,6 +32,7 @@ class TaskAdapter : RecyclerView.Adapter<TaskAdapter.TodoViewHolder>() {
 
     }
     fun setTaskList(taskList:List<Task>)  {
+        this.taskList.clear()
         this.taskList.addAll(taskList)
         notifyDataSetChanged()
     }

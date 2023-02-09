@@ -57,8 +57,7 @@
         android:background="@color/text"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        android:outlineAmbientShadowColor="@color/text"
-        android:outlineSpotShadowColor="@color/text"/>
+        />
 
     <LinearLayout
         android:id="@+id/linearLayout"
