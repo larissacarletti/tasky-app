@@ -46,13 +46,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupView() = binding.run {
-        imgSent?.setOnClickListener {
+        imgSent.setOnClickListener {
             viewModel.insertTask(
                 Task(
-                    title = newtask?.text.toString(),
+                    title = newtask.text.toString(),
                     completed = false
                 )
             )
+            newtask.text.clear()
         }
     }
 }
