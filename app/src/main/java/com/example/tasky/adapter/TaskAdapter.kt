@@ -1,21 +1,20 @@
 package com.example.tasky.adapter
 
-
-import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasky.MainActivity
+import com.example.tasky.R
 import com.example.tasky.model.Task
 import com.example.tasky.databinding.ListItemBinding
 import com.example.tasky.util.strikethrough
 
-class TaskAdapter (
-    private val context: Context,
-    private val listener: MainActivity
-): RecyclerView.Adapter<TaskAdapter.TodoViewHolder>() {
+class TaskAdapter (private val listener: MainActivity):
+    RecyclerView.Adapter<TaskAdapter.TodoViewHolder>() {
     private val taskList = ArrayList<Task>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         val binding = ListItemBinding.inflate(LayoutInflater.from(parent.context), parent,false)
@@ -24,10 +23,17 @@ class TaskAdapter (
     override fun getItemCount(): Int = taskList.size
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val task = taskList[position]
+        val previousTask = if(position == 0) null else taskList[position - 1]
         holder.run{
             textTask.text = task.title
             check.isChecked = task.completed
-            textTask.strikethrough = task.completed
+            if(task.completed) textTask.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            if(previousTask != null && !previousTask.completed && task.completed){
+                finishedLabel.visibility = View.VISIBLE
+                finishedLabel.setText(
+                    R.string.finished
+                )
+            }
         }
         holder.check.setOnClickListener {
             listener.onItemClicked(taskList[holder.adapterPosition])
@@ -38,10 +44,11 @@ class TaskAdapter (
         : RecyclerView.ViewHolder(binding.root) {
             val textTask: TextView = binding.tvTitle
             val check: CheckBox = binding.checkDone
+            val finishedLabel: TextView = binding.finishLabel
 
     }
     interface TasksClickListener {
-        fun onItemClicked()
+        fun onItemClicked(task:Task)
     }
 
     fun setTaskList(taskList:List<Task>)  {

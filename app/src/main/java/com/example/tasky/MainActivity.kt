@@ -5,15 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasky.adapter.TaskAdapter
 import com.example.tasky.databinding.ActivityMainBinding
-import com.example.tasky.databinding.ListItemBinding
 import com.example.tasky.model.Task
 import com.example.tasky.util.Resource
 import com.example.tasky.viewmodel.TaskViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
-
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), TaskAdapter.TasksClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var taskAdapter: TaskAdapter
@@ -41,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerView() = binding.run {
-        taskAdapter = TaskAdapter()
+        taskAdapter = TaskAdapter(this@MainActivity)
         recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
         recyclerView.adapter = taskAdapter
     }
@@ -61,8 +57,9 @@ class MainActivity : AppCompatActivity() {
     override fun onItemClicked(task: Task) {
         viewModel.updateTask(
             Task(
+                id = task.id,
                 title = task.title,
-                completed = true
+                completed = !task.completed
             )
         )
     }

@@ -1,37 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/background">
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="15dp"
+        android:layout_marginBottom="5dp"
         android:fontFamily="@font/nunito_bold"
         android:textColor="@color/text"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toEndOf="@+id/checkDone"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Placeholder"
-        />
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="Placeholder" />
 
     <CheckBox
         android:id="@+id/checkDone"
         style="@style/CustomCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/tvTitle">
 
     </CheckBox>
+
+    <TextView
+        android:id="@+id/finishLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/finished"
+        android:textColor="@color/text"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/tvTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
