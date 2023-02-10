@@ -19,7 +19,7 @@ interface TaskDao {
    @Query("SELECT * FROM task_table order by id DESC")
    fun getAllTasks():Flow<List<Task>>
 
-   @Query("DELETE FROM task_table")
+   @Query("DELETE FROM task_table WHERE done = 1")
    suspend fun deleteAll()
 
 }

@@ -1,6 +1,5 @@
 package com.example.tasky.adapter
 
-import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import com.example.tasky.MainActivity
 import com.example.tasky.R
 import com.example.tasky.model.Task
 import com.example.tasky.databinding.ListItemBinding
+import com.example.tasky.util.strikethrough
 
 class TaskAdapter (private val listener: MainActivity):
     RecyclerView.Adapter<TaskAdapter.TodoViewHolder>() {
@@ -26,7 +26,7 @@ class TaskAdapter (private val listener: MainActivity):
         holder.run{
             textTask.text = task.title
             check.isChecked = task.completed
-            if(task.completed) textTask.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            textTask.strikethrough = task.completed
             if(previousTask != null && !previousTask.completed && task.completed){
                 finishedLabel.visibility = View.VISIBLE
                 finishedLabel.text = listener.getString(
@@ -34,7 +34,10 @@ class TaskAdapter (private val listener: MainActivity):
                     taskList.filter {it.completed}.size
                 )
                 divider.visibility = View.VISIBLE
-            } else { finishedLabel.visibility = View.GONE}
+            } else {
+                finishedLabel.visibility = View.GONE
+                divider.visibility= View.GONE
+            }
         }
         holder.check.setOnClickListener {
             listener.onItemClicked(taskList[holder.adapterPosition])

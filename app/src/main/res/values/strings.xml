@@ -4,4 +4,8 @@
     <string name="styledText">s>StyledTexts/></string>
     <string name="crie_uma_tarefa">Crie uma tarefa!</string>
     <string name="finished">Finalizadas (%d)</string>
+    <string name="alert_title">Apagar tarefas</string>
+    <string name="decline">Não</string>
+    <string name="accept">Sim</string>
+    <string name="alertAll">Deseja realmente apagar todas as tarefas?</string>
 </resources>

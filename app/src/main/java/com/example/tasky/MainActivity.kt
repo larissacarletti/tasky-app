@@ -1,8 +1,8 @@
 package com.example.tasky
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasky.adapter.TaskAdapter
 import com.example.tasky.databinding.ActivityMainBinding
@@ -24,18 +24,6 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TasksClickListener {
         setRecyclerView()
         setupObservers()
         setupView()
-
-//        binding.deleteButton.setOnClickListener {
-//            MaterialAlertDialogBuilder(
-//                requireContext(),
-//                R.style.ThemeOverlay_App_MaterialAlertDialog
-//            ).setIcon(R.drawable.delete)
-//                .setMessage(resources.getString(R.string.alert))
-//                .setTitle(resources.getString(R.string.alert_title))
-//                .setNegativeButton(resources.getString(R.string.decline)) { _, _ -> }
-//                .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
-//                    viewModel.deleteAllNotes()
-//                }.show()
       }
     private fun setupObservers() {
         viewModel.taskList.observe(this@MainActivity) { result ->
@@ -44,6 +32,21 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TasksClickListener {
                     taskAdapter.setTaskList(
                         taskList.sortedBy { it.completed }
                     )
+                    if(taskList.isNotEmpty() && taskList.any{it.completed} ) {
+                        binding.deleteButton.visibility = View.VISIBLE
+                        binding.deleteButton.setOnClickListener {
+                            MaterialAlertDialogBuilder(
+                                applicationContext,
+                                R.style.ThemeOverlay_App_MaterialAlertDialog
+                            ).setIcon(R.drawable.delete)
+                                .setMessage(resources.getString(R.string.alertAll))
+                                .setTitle(resources.getString(R.string.alert_title))
+                                .setNegativeButton(resources.getString(R.string.decline)) { _, _ -> }
+                                .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
+                                    viewModel.deleteAllTasks()
+                                }.show()
+                        }
+                    }
                 }
                 else -> Unit
             }
