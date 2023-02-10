@@ -23,4 +23,6 @@ class TaskRepository (private val taskyApi: TaskyApi, private val db: TaskDataba
     fun insert(task: Task) : Unit = taskdao.insertTask(task)
 
     fun update(task: Task) : Unit = taskdao.update(task)
+
+    suspend fun deleteAll() : Unit = taskdao.deleteAll()
 }

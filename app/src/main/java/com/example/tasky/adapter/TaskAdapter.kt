@@ -11,7 +11,6 @@ import com.example.tasky.MainActivity
 import com.example.tasky.R
 import com.example.tasky.model.Task
 import com.example.tasky.databinding.ListItemBinding
-import com.example.tasky.util.strikethrough
 
 class TaskAdapter (private val listener: MainActivity):
     RecyclerView.Adapter<TaskAdapter.TodoViewHolder>() {
@@ -30,10 +29,12 @@ class TaskAdapter (private val listener: MainActivity):
             if(task.completed) textTask.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             if(previousTask != null && !previousTask.completed && task.completed){
                 finishedLabel.visibility = View.VISIBLE
-                finishedLabel.setText(
-                    R.string.finished
+                finishedLabel.text = listener.getString(
+                    R.string.finished,
+                    taskList.filter {it.completed}.size
                 )
-            }
+                divider.visibility = View.VISIBLE
+            } else { finishedLabel.visibility = View.GONE}
         }
         holder.check.setOnClickListener {
             listener.onItemClicked(taskList[holder.adapterPosition])
@@ -45,6 +46,7 @@ class TaskAdapter (private val listener: MainActivity):
             val textTask: TextView = binding.tvTitle
             val check: CheckBox = binding.checkDone
             val finishedLabel: TextView = binding.finishLabel
+            val divider: View = binding.dividerFinish
 
     }
     interface TasksClickListener {

@@ -3,5 +3,5 @@
     <string name="headline">TASKY!</string>
     <string name="styledText">s>StyledTexts/></string>
     <string name="crie_uma_tarefa">Crie uma tarefa!</string>
-    <string name="finished">Finalizadas</string>
+    <string name="finished">Finalizadas (%d)</string>
 </resources>

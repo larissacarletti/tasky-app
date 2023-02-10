@@ -2,12 +2,14 @@ package com.example.tasky
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasky.adapter.TaskAdapter
 import com.example.tasky.databinding.ActivityMainBinding
 import com.example.tasky.model.Task
 import com.example.tasky.util.Resource
 import com.example.tasky.viewmodel.TaskViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : AppCompatActivity(), TaskAdapter.TasksClickListener {
 
@@ -22,7 +24,19 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TasksClickListener {
         setRecyclerView()
         setupObservers()
         setupView()
-    }
+
+//        binding.deleteButton.setOnClickListener {
+//            MaterialAlertDialogBuilder(
+//                requireContext(),
+//                R.style.ThemeOverlay_App_MaterialAlertDialog
+//            ).setIcon(R.drawable.delete)
+//                .setMessage(resources.getString(R.string.alert))
+//                .setTitle(resources.getString(R.string.alert_title))
+//                .setNegativeButton(resources.getString(R.string.decline)) { _, _ -> }
+//                .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
+//                    viewModel.deleteAllNotes()
+//                }.show()
+      }
     private fun setupObservers() {
         viewModel.taskList.observe(this@MainActivity) { result ->
             when (result) {

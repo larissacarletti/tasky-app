@@ -18,4 +18,9 @@ class TaskViewModel (private val repository: TaskRepository) : ViewModel() {
         repository.update(task)
     }
 
+    fun deleteAllTasks() = viewModelScope.launch (Dispatchers.IO) {
+        repository.deleteAll()
+    }
+
+
 }
