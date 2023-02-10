@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasky.adapter.TaskAdapter
 import com.example.tasky.databinding.ActivityMainBinding
+import com.example.tasky.databinding.ListItemBinding
 import com.example.tasky.model.Task
 import com.example.tasky.util.Resource
 import com.example.tasky.viewmodel.TaskViewModel
@@ -55,5 +56,14 @@ class MainActivity : AppCompatActivity() {
             )
             newtask.text.clear()
         }
+    }
+
+    override fun onItemClicked(task: Task) {
+        viewModel.updateTask(
+            Task(
+                title = task.title,
+                completed = true
+            )
+        )
     }
 }
