@@ -13,7 +13,7 @@ Tasky is a to-do app where you can <b>create</b> a task, <b>update</b> it, and t
   - Coroutines, 
   - Koin Dependency Injection and 
   - Data Binding
-  <b/>
+  <br/>
 
 
 <img src="https://user-images.githubusercontent.com/122300740/218273032-819d2637-11ce-4c5e-85da-b6221850db6c.jpg" width="200" height="500" />
